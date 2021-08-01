@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Tutorial</title>
+</head>
+<body>
+    {% block app_content %}
+    {% if not name %}
+    <form method="post">
+        <input type="text" name="user">
+        <input type="submit" name="send" value="Send">
+    </form>
+    {% else %}
+    <p>Hello, {{name}}</p>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

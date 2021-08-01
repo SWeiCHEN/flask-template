@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+{{super()}}
+{% endblock %}
+
+{% block app_content %}
+<div class="row">
+    <div class="col-md-9  col-lg-7">
+
+        <!-------------------- post block --------------------->
+        <!-- using flask-bootstrap -->
+        {#
+        {% import 'bootstrap/wtf.html' as wtf %}
+        {{ wtf.quick.form(form) }}
+        #}
+
+        <div class="contactus-form bg-light mt-4 p-4">
+            <form action="" method="POST" class="row g-3">
+                {{ form.csrf_token }}
+                <h4>Contact Us</h4>
+
+
+                <div class="col-12">
+                    <label>Say Something ...</label>
+                    <input type="text" name="text" class="form-control" placeholder="Say Something ... ">
+                </div>
+
+
+                <!-- sign up button -->
+                <div class="col-12">
+                    <button type="submit" class="btn btn-dark float-end">Post</button>
+                </div>
+            </form>
+        </div>
+        <!-------------------- post block --------------------->
+
+
+        <!-------------------- post record --------------------->
+        <hr>
+        {% for post in posts.items %}
+        <!-- Media object -->
+        <div class="d-flex">
+            <a href="{{ url_for('user_page', username=post.author.username) }}">
+                <!-- Image -->
+                <img src="{{ post.author.avatar_img }}" alt="avatar" class="me-3 rounded-circle" style="width: 60px; height: 60px;" />
+            </a>
+            <!-- Body -->
+            <div>
+                <h5 class="fw-bold">
+                    {{ post.author.username }}
+                    <small class="text-muted">{{ post.timestamp }}</small>
+                </h5>
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <!-------------------- post record --------------------->
+
+
+        <!--------------------- pagination ----------------------->
+        <nav class="" aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <!-- first page -->
+                <li class="page-item {% if posts.page == 1 %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('contact_us', page=1) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <!-- previous page -->
+                <li class="page-item {% if not posts.has_prev %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('contact_us', page=posts.prev_num) }}" aria-label="Previous">
+                        <span aria-hidden="true">&lsaquo;</span>
+                    </a>
+                </li>
+
+                {% if posts.page > 3 %}
+                <li class="page-item disable">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                {% endif %}
+
+
+                {% for i in posts.iter_pages(left_edge=0, left_current=2, right_current=3, right_edge=0) %}
+                {# right_current 包含當下那頁 #}
+                {% if i %}
+                <li class="page-item {% if i == posts.page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('contact_us', page=i) }}">{{ i }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if posts.pages > posts.page+2 %}
+                <li class="page-item disable">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                {% endif %}
+
+                <!-- next page -->
+                <li class="page-item {% if not posts.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('contact_us', page=posts.next_num) }}" aria-label="Next">
+                        <span aria-hidden="true">&rsaquo;</span>
+                    </a>
+                </li>
+                <!-- last page -->
+                <li class="page-item {% if posts.page == posts.pages %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('contact_us', page=posts.pages) }}" aria-label="Previous">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!--------------------- pagination ----------------------->
+
+    </div>
+</div>
+
+{% endblock %}

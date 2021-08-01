@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--order IE default version-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--for mobile device, default width is device-width and 100%-->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Flask Tutorial">
+    <meta name="author" content="Sheng-Wei Chen">
+    <link rel="icon" href="{{ url_for('static', filename='images/flask.ico') }}">
+    <title>
+        {% block title %}
+        {% if title %}
+        {{ title }} | Flask App
+        {% else %}
+        Flask App
+        {% endif %}
+        {% endblock %}
+    </title>
+    {% block css %}
+    <!-- reset.css is no need if using Bootstrap -->
+    <!--    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/reset.css')}}">-->
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='libs/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+
+    <!-- test bootstrap 5 included -->
+
+    <!--
+    <a href="/" class="btn btn-info">Flask App</a>
+    <hr>
+-->
+
+
+    {% include 'navbar.html' %}
+    <div id="content">
+        {% block content %}
+        <!--Custom template area-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+            {% block app_content %}{% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        {% include 'footer.html' %}
+        {% endblock %}
+    </div>
+    {% block js %}
+    <!--js module area-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+<!--bundle contain propper-->
+    <script src="{{ url_for('static', filename='libs/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js') }}"></script>
+
+    {% endblock %}
+</body>
+
+</html>

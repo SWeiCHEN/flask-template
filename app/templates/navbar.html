@@ -1,0 +1,85 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='libs/icons-1.5.0/font/bootstrap-icons.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/navbar.css') }}">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="navbar">
+    <!--    <font style="color: whitesmoke">navbar</font>-->
+    <div class="container">
+        <!--container使得內容左右留白 -->
+        <a class="navbar-brand" href="/">Flask App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!--
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+-->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" aria-current="page" href="{{ url_for('index') }}">
+                        <i class="bi-house-door"></i>
+                        Home
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        <i class="bi bi-link-45deg"></i>
+                        Link
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown07">
+                        <li><a class="dropdown-item" href="/">Action</a></li>
+                        <li><a class="dropdown-item" href="/">Another action</a></li>
+                        <li><a class="dropdown-item" href="/">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-right">
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'sign_up' %}active{% endif %}" aria-current="page" href="{{ url_for('sign_up') }}">
+                        Sign up
+                    </a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!--TODO: convert src from backend-->
+                        <img src="{{ current_user.avatar_img }}" style="width: 21px; border-radius: 10px;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="dropdown07">
+                        <li>
+                            <a class="dropdown-item nav-link {% if request.endpoint == 'my_profile' %}active{% endif %}" aria-current="page" href="{{ url_for('my_profile') }}" href="/">My Profile</a>
+                        </li>
+                        <!-- sign out-->
+                        <li class="">
+                            <a class="dropdown-item nav-link {% if request.endpoint == 'sign_out' %}active{% endif %}" aria-current="page" href="{{ url_for('sign_out') }}">
+                                Sign out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'sign_in' %}active{% endif %}" aria-current="page" href="{{ url_for('sign_in') }}">
+                        Sign in
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

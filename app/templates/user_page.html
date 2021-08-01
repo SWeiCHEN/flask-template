@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+{{super()}}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='libs/icons-1.5.0/font/bootstrap-icons.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user_page.css') }}">
+{% endblock %}
+
+{% block app_content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="thumbnail text-center" style="overflow: hidden;">
+
+            <!-- avatar -->
+            {%if current_user == user%}
+            <div class="dropdown btn-group">
+                <input type="image" name="avatar" src="{{ current_user.avatar_img }}" id="" class="img-fluid dropdown-toggle" style="height:auto" data-bs-toggle="dropdown" aria-expanded="false">
+                <ul class="dropdown-menu dropdown-menu-center">
+                    <li>
+                        <a class="dropdown-item" href="{{ url_for('upload_avatar') }}">
+                            <i class="bi-upload"></i>
+                            Upload a picture
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/">
+                            <i class="bi-camera"></i>
+                            Take a photo
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/">
+                            <i class="bi-x-lg"></i>
+                            Remove your avatar
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <img src="{{ current_user.avatar_img }}" class="img-fluid" style="height:auto" alt="avatar">
+            {% endif %}
+
+            <!-- button -->
+            <div class="caption">
+                <h4>{{user.username}}</h4>
+                <p>
+                    <a href="#" class="btn btn-primary" role="button">{{ n_followers }} followers</a>
+                    <a href="#" class="btn btn-primary" role="button">{{ n_followed }} followed</a>
+                </p>
+                <p>
+                    {% if current_user == user %}
+                    <a href="#" class="btn btn-info">Edit Profile</a>
+                    {% else %}
+                    {% if current_user.is_following(user) %}
+                    <a href="{{ url_for('unfollow', username=user.username) }}" class="btn btn-warning">Unfollow</a>
+                    {% else %}
+                    <a href="{{ url_for('follow', username=user.username) }}" class="btn btn-success">Follow</a>
+                    {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- TODO -->
+    <div class="col-md-9"></div>
+</div>
+{% endblock %}

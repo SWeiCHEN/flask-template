@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block app_content %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4 ">
+        <!-- using flask-bootstrap -->
+        {#
+        {% import 'bootstrap/wtf.html' as wtf %}
+        {{ wtf.quick.form(form) }}
+        #}
+
+        <div class="signup-form bg-light mt-4 p-4">
+            <form action="" method="POST" enctype="multipart/form-data" class="row g-3">
+                {{ form.csrf_token }}
+                <h4>Upload Avatar</h4> 
+                {{ form.avatar(class="form-control btn btn-outline-info") }}
+                {{ form.submit(class="btn btn-outline-success") }}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

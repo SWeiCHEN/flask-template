@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href=" {{url_for('static', filename='css/footer.css')}} ">
+
+<style>
+
+</style>
+
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-sm-5 copyright text-black-50">
+            <span>Copyright &copy; 2021 Sheng-Wei,Chen</span>
+        </div>
+        <div class="text-right col-sm-7 region-tw">
+            <div class="links">
+                <a class="{% if request.endpoint == 'contact_us' %}active{% endif %}" href="{{ url_for('contact_us') }}">Contact Us</a>
+                &nbsp;|&nbsp;
+<!--            TODO-->
+                <a href="/terms/">Terms</a>
+                &nbsp;|&nbsp;
+                <a href="/privacy/">Privacy<span class="hide-too-small"> Policy</span></a>
+                <span class="region-base">
+                    <span class="hidden-xs space">&nbsp; &nbsp; </span>
+<!--                    <br class="visible-xs newline" />-->
+                    <a href="/region/" class="choose-region tw">
+                        <img src="/static/images/region/tw.svg" height="14" />
+                        <span class="hidden-md">Taiwan</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

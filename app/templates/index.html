@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block css %}
+{{super()}}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+<style>
+/*    something in css file need to overwirte by Flask*/
+    .typing-demo {
+        width: {{ length }}ch;
+        animation-steps: {{ length }};
+    }
+</style>
+{% endblock %}
+
+{% block app_content %}
+<div class="wrapper">
+    <div class="typing-demo">
+        Hello, {{current_user.username}}
+    </div>
+</div>
+{% endblock %}

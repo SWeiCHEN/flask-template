@@ -1,0 +1,37 @@
+.copyright {
+    float: left;
+}
+
+.links {
+    float: right;
+}
+
+
+.region-tw a {
+    /*    .link-dark;*/
+    color: dimgray;
+}
+
+/* unvisited link */
+.region-tw a:link {
+    text-decoration: none;
+}
+
+/* visited link */
+.region-tw a:visited {
+    text-decoration: none;
+}
+
+/* mouse over link */
+.region-tw a:hover {
+    text-decoration: none;
+}
+
+/* clicked link */
+.region-tw a:active {
+    text-decoration: none;
+}
+
+img {
+    margin-bottom: 2px;
+}
