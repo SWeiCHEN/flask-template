@@ -2,7 +2,7 @@ venv/
 
 *.pyc
 __pycache__/
-.ideal/
+.idea/
 app/__pycache__/
 
 .DS_Store
