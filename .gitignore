@@ -1,2 +1,13 @@
+venv/
+
+*.pyc
+__pycache__/
+.ideal/
+app/__pycache__/
+
+.DS_Store
+
 config_private.py
 DB測試/
+
+project\ layout\ ref/*

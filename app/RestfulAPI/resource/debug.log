@@ -1,0 +1,4 @@
+2021-08-15 16:21:15,135 - werkzeug - INFO -  * Detected change in '/Users/Wai/Dropbox/Web/Backend/flask/app/resource/Restful_API.py', reloading
+2021-08-15 16:21:47,331 - werkzeug - INFO - 192.168.66.14 - - [15/Aug/2021 16:21:47] "[33mGET /RESTfulAPI HTTP/1.1[0m" 404 -
+2021-08-15 16:22:48,796 - werkzeug - INFO -  * Detected change in '/Users/Wai/Dropbox/Web/Backend/flask/app/resource/Restful_API.py', reloading
+2021-08-15 16:23:24,377 - werkzeug - INFO -  * Detected change in '/Users/Wai/Dropbox/Web/Backend/flask/app/resource/Restful_API.py', reloading
