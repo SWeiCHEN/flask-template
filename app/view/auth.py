@@ -6,7 +6,7 @@ from app.forms import SignUpForm, SignInForm, ResetPasswordRequestForm, ResetPas
 from app.models import User
 from app.email import send_reset_password_mail
 
-app_auth = Blueprint('app_auth', __name__)
+app_auth = Blueprint('app_auth', __name__, template_folder='../templates/auth')
 
 
 @app_auth.route('/app_auth')
@@ -33,7 +33,7 @@ def sign_up():
         return redirect(url_for('sign_in'))
     else:
         print(form.errors.items())
-    return render_template('auth/Sign_up.html', form=form)
+    return render_template('Sign_up.html', form=form)
 
 
 @app.route('/Sign_in', methods=['POST', 'GET'])
@@ -58,7 +58,7 @@ def sign_in():
                     return redirect(next_page)
                 return redirect(url_for('index'))
             flash('User not exists or password not match', category='danger')  # 不明說是帳號不存在還是密碼錯誤，避免有心人士暴力破解
-    return render_template('auth/Sign_in.html', form=form)
+    return render_template('Sign_in.html', form=form)
 
 
 @app.route('/Sign_out')
@@ -79,7 +79,7 @@ def forgot_password():
         token = user.generate_reset_password_token()
         send_reset_password_mail(user, token)
         flash('Password reset request mail is sent, please check your mailbox', category='info')
-    return render_template('auth/forgot_password.html', form=form)
+    return render_template('forgot_password.html', form=form)
 
 
 @app.route('/reset_password/<token>', methods=['POST', 'GET'])
@@ -97,4 +97,4 @@ def reset_password(token):
         else:
             flash('The user is not exist', category='info')
             redirect(url_for('sign_in'))
-    return render_template('auth/reset_password.html', form=form)
+    return render_template('reset_password.html', form=form)
